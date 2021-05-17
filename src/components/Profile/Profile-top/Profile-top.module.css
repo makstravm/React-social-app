@@ -1,0 +1,7 @@
+
+.top img {
+  width: 100%;
+  object-fit: cover;
+  height: 150px;
+  margin-bottom: 25px;
+}

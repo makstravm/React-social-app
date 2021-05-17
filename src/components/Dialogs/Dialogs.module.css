@@ -1,0 +1,37 @@
+.dialogs {
+  display: flex;
+  justify-content: space-between;
+  padding: 25px 45px;
+}
+
+.items {
+  max-width: 200px;
+  width: 100%;
+  margin-right: 25px;
+}
+.link {
+  display: inline-block;
+  text-decoration: none;
+  color: #000;
+  padding: 5px 15px;
+  margin-bottom: 5px;
+  width: 100%;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+.link:hover {
+  box-shadow: 0px 1px 2px 0px #0000003d;
+}
+.link:active {
+  box-shadow: 0px 0px 3px 0px #0000003d inset, 0px 0px 3px 0px #0000003d;
+}
+
+.link.active {
+  color: rgb(117, 117, 117);
+  box-shadow: inset 0px 0px 12px 0px #0000003d;
+}
+
+.messages {
+  width: 100%;
+}
+

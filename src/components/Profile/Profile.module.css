@@ -1,0 +1,49 @@
+
+.top img {
+  width: 100%;
+  object-fit: cover;
+  height: 150px;
+  margin-bottom: 25px;
+}
+
+.content {
+  padding: 0 25px;
+}
+
+.inner {
+  display: flex;
+  padding-bottom: 50px;
+}
+
+.avatar {
+  max-width: 150px;
+  margin-right: 25px;
+}
+
+.avatar img {
+  height: 150px;
+  object-fit: scale-down;
+}
+
+.name {
+  font-size: 26px;
+  line-height: 38px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.item span {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.link {
+  text-decoration: none;
+  color: rgb(31, 31, 31);
+  transition: all 0.3s;
+}
+
+.link:hover {
+  color: rgb(87, 58, 58);
+  text-shadow: 0px 0px 5px rgb(87, 58, 58);
+}
