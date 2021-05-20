@@ -8,7 +8,7 @@ type DialogsPropsType = {
   dialogPage: DialogsType
 }
 
-export function Dialogs(props: DialogsPropsType) {
+export function Dialogs(props: any) {
   return (
     <div className={style.dialogs}>
       <DialogsItem dialogData={props.dialogPage.dialogData} />

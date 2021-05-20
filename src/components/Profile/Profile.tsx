@@ -7,6 +7,7 @@ import style from './Profile.module.css';
 
 type ProfilePropsType = {
   profilPage: ProfileType
+  addPost: (post: string) => void
 }
 
 export function Profile(props: ProfilePropsType) {
@@ -34,7 +35,10 @@ export function Profile(props: ProfilePropsType) {
             </div>
           </div>
         </div>
-        <MyPosts postsData={props.profilPage.postsData} />
+        <MyPosts
+          postsData={props.profilPage.postsData}
+          addPost={props.addPost}
+        />
       </div>
     </div>
   )

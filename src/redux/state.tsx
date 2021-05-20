@@ -1,65 +1,85 @@
+import { v1 } from "uuid"
+import { rerenderTree } from "../render"
+
 export type PostDataType = {
-  id: number
-  avatar: string,
+  id: string
+  avatar: string
   post: string
+  likes: number
 }
-export type dialogDataPropsType = {
+export type DialogDataType = {
   name: string
-  id: number
+  id: string
 }
-export type messageDataPropsType = {
+export type MessageDataType = {
   message: string
-  id: number
+  id: string
 }
 export type ProfileType = {
   postsData: Array<PostDataType>
 }
 export type DialogsType = {
-  dialogData: Array<dialogDataPropsType>
-  messageData: Array<messageDataPropsType>
+  dialogData: Array<DialogDataType>
+  messageData: Array<MessageDataType>
 }
-export type StateType = {
+export type StateRootType = {
   profilePage: ProfileType
   dialogPage: DialogsType
 
 }
 
-const state: StateType = {
+const state: StateRootType = {
   profilePage: {
     postsData: [
       {
-        id: 1,
+        id: v1(),
         avatar: 'https://i.redd.it/riuuew03o6p11.jpg',
-        post: 'Either I will find a way, or I will make one.'
+        post: 'Either I will find a way, or I will make one.',
+        likes: 43
       },
       {
-        id: 2,
+        id: v1(),
         avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyUt45KAXsw3OIqBECO_b_3X0EOOjqKD87ag&usqp=CAU',
-        post: 'Live for yourself'
+        post: 'Live for yourself',
+        likes: 143
       },
       {
-        id: 3,
+        id: v1(),
         avatar: 'https://w7.pngwing.com/pngs/449/937/png-transparent-world-of-warcraft-draenei-chibi-art-drawing-world-of-warcraft-game-mammal-chibi-thumbnail.png',
-        post: 'You are your only limit'
+        post: 'You are your only limit',
+        likes: 99
       }
     ],
   },
   dialogPage: {
     dialogData: [
-      { id: 1, name: 'Viktoria' },
-      { id: 2, name: 'Maks' },
-      { id: 3, name: 'Bob' },
-      { id: 4, name: 'John' },
-      { id: 5, name: 'Alexey' },
-      { id: 6, name: 'Vladimir' }
+      { id: v1(), name: 'Viktoria' },
+      { id: v1(), name: 'Maks' },
+      { id: v1(), name: 'Bob' },
+      { id: v1(), name: 'John' },
+      { id: v1(), name: 'Alexey' },
+      { id: v1(), name: 'Vladimir' }
     ],
     messageData: [
-      { id: 1, message: 'Hi' },
-      { id: 2, message: 'Hi. How are you?' },
-      { id: 3, message: 'Oh. Great. And you?' },
-      { id: 4, message: 'I am funny, thank you' }
+      { id: v1(), message: 'Hi' },
+      { id: v1(), message: 'Hi. How are you?' },
+      { id: v1(), message: 'Oh. Great. And you?' },
+      { id: v1(), message: 'I am funny, thank you' }
     ]
   }
-
 }
+
+
+export const addPost = (post: string) => {
+  const newPost: PostDataType = {
+    id: v1(),
+    avatar: ' Your photo',
+    post,
+    likes: 0
+  }
+  state.profilePage.postsData.push(newPost);
+  rerenderTree(state);
+}
+
 export default state
+
