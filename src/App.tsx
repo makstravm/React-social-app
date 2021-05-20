@@ -6,11 +6,11 @@ import { Header } from './components/Header/Header';
 import { Menu } from './components/Menu/Menu';
 import { } from './components/Profile/MyPosts/MyPosts';
 import { Profile } from './components/Profile/Profile';
-import { StateType } from './redux/state';
-
+import { StateRootType } from './redux/state';
+import { addPost } from './redux/state';
 
 type AppPropsType = {
-  appState: StateType
+  appState: StateRootType
 }
 
 function App(props: AppPropsType) {
@@ -23,8 +23,11 @@ function App(props: AppPropsType) {
             <Menu />
             <div className="content-inner">
               <Route path='/profile' render={() => <Profile
-                profilPage={props.appState.profilePage} />} />
-              <Route path='/dialogs' render={() => <Dialogs dialogPage={props.appState.dialogPage} />} />
+                addPost={addPost}
+                profilPage={props.appState.profilePage}
+              />} />
+              <Route path='/dialogs' render={() => <Dialogs
+                dialogPage={props.appState.dialogPage} />} />
             </div>
           </div>
         </div>

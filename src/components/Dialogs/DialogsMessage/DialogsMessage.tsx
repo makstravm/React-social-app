@@ -1,10 +1,10 @@
 import React from 'react';
-import { messageDataPropsType } from '../../../redux/state';
+import { MessageDataType } from '../../../redux/state';
 import style from '../Dialogs.module.css'
 
 
 type DialogsMessagePropsType = {
-  message: Array<messageDataPropsType>
+  message: Array<MessageDataType>
 }
 
 export const DialogsMessage = (props: DialogsMessagePropsType) => {
