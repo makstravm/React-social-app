@@ -4,7 +4,9 @@ import style from './Post.module.css';
 
 type PostTypeProps = {
   postsData: Array<PostDataType>
+  newPost: string
   addPost: (post: string) => void
+  updateNewPostText: (newPost: string) => void
 }
 
 export function Post(props: PostTypeProps) {
@@ -22,19 +24,22 @@ export function Post(props: PostTypeProps) {
       </div>
     )
   })
-  const postMessegeRef = React.createRef<HTMLTextAreaElement>()
 
+  const onChangePostHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    props.updateNewPostText(e.currentTarget.value)
+  }
   const addPostMessege = () => {
-    if (postMessegeRef.current) {
-      props.addPost(postMessegeRef.current.value)
-      postMessegeRef.current.value = ''
+    const correctSpaceNewPost = props.newPost.trim()
+    if (correctSpaceNewPost) {
+      props.addPost(correctSpaceNewPost)
+      props.updateNewPostText('')
     }
+
   }
   const addPostKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter') {
       addPostMessege()
     }
-
   }
   return (
     <div>
@@ -42,7 +47,8 @@ export function Post(props: PostTypeProps) {
         <textarea
           className={style.textarea}
           onKeyPress={addPostKeyPress}
-          ref={postMessegeRef}
+          onChange={onChangePostHandler}
+          value={props.newPost}
           placeholder='Write your post...'></textarea>
         <button
           className={style.btn}
@@ -50,5 +56,5 @@ export function Post(props: PostTypeProps) {
         >Add Post</button>
       </div>
       {post}
-    </div>)
+    </div >)
 }

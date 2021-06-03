@@ -1,5 +1,6 @@
 import { v1 } from "uuid"
-import { rerenderTree } from "../render"
+
+let rerenderTree = () => {}
 
 export type PostDataType = {
   id: string
@@ -17,6 +18,7 @@ export type MessageDataType = {
 }
 export type ProfileType = {
   postsData: Array<PostDataType>
+  newPost: string
 }
 export type DialogsType = {
   dialogData: Array<DialogDataType>
@@ -50,6 +52,7 @@ const state: StateRootType = {
         likes: 99
       }
     ],
+    newPost: ''
   },
   dialogPage: {
     dialogData: [
@@ -77,8 +80,17 @@ export const addPost = (post: string) => {
     post,
     likes: 0
   }
-  state.profilePage.postsData.push(newPost);
-  rerenderTree(state);
+  state.profilePage.postsData.push(newPost)
+  rerenderTree();
+}
+export const updateNewPostText = (newPost: string) => {
+  debugger
+  state.profilePage.newPost = newPost
+  rerenderTree();
+}
+
+export const subscribe = (observer: () => void) => {
+  rerenderTree = observer;
 }
 
 export default state
