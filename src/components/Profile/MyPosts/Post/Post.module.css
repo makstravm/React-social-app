@@ -52,6 +52,7 @@
 
 .text {
   max-width: 350px;
+  word-wrap: break-word;
   padding: 15px 20px;
   position: relative;
   border-radius: 10px;

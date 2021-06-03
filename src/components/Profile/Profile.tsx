@@ -8,6 +8,7 @@ import style from './Profile.module.css';
 type ProfilePropsType = {
   profilPage: ProfileType
   addPost: (post: string) => void
+  updateNewPostText: (newPost: string) => void
 }
 
 export function Profile(props: ProfilePropsType) {
@@ -37,7 +38,9 @@ export function Profile(props: ProfilePropsType) {
         </div>
         <MyPosts
           postsData={props.profilPage.postsData}
+          newPost={props.profilPage.newPost}
           addPost={props.addPost}
+          updateNewPostText={props.updateNewPostText}
         />
       </div>
     </div>

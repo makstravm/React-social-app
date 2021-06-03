@@ -22,6 +22,16 @@ export function Menu() {
         <li className={style.item}>
           <NavLink className={style.link} to='/setings' activeClassName={style.active}>Settings</NavLink>
         </li>
+        <li className={style.item}>
+          <NavLink className={style.link} to='/friends' activeClassName={style.active}>Friends</NavLink>
+          <div>
+            <div>15</div>
+            <div>25</div>
+            <div>35</div>
+            <div>45</div>
+            <div>55</div>
+          </div>
+        </li>
       </ul>
     </nav>
   )
