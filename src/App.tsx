@@ -6,16 +6,14 @@ import { Header } from './components/Header/Header';
 import { Menu } from './components/Menu/Menu';
 import { } from './components/Profile/MyPosts/MyPosts';
 import { Profile } from './components/Profile/Profile';
-import { StateRootType } from './redux/state';
-import { addPost } from './redux/state';
+import { StoreType } from './redux/state';
 
 type AppPropsType = {
-  appState: StateRootType
-  addPost: (post: string) => void
-  updateNewPostText: (newPost: string) => void
+  store: StoreType
 }
 
 function App(props: AppPropsType) {
+  const state = props.store.getState()
   return (
     <BrowserRouter>
       <div className="app-wrapper">
@@ -25,12 +23,12 @@ function App(props: AppPropsType) {
             <Menu />
             <div className="content-inner">
               <Route path='/profile' render={() => <Profile
-                addPost={addPost}
-                profilPage={props.appState.profilePage}
-                updateNewPostText={props.updateNewPostText}
+                addPost={props.store.addPost.bind(props.store)}
+                profilPage={props.store._state.profilePage}
+                updateNewPostText={props.store.updateNewPostText.bind(props.store)}
               />} />
               <Route path='/dialogs' render={() => <Dialogs
-                dialogPage={props.appState.dialogPage} />} />
+                dialogPage={props.store._state.dialogPage} />} />
             </div>
           </div>
         </div>
