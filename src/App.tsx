@@ -27,7 +27,8 @@ function App(props: AppPropsType) {
                 dispatch={props.store.dispatch.bind(props.store)}
               />} />
               <Route path='/dialogs' render={() => <Dialogs
-                dialogPage={props.store._state.dialogPage} />} />
+                dialogPage={props.store._state.dialogPage}
+                dispatch={props.store.dispatch.bind(props.store)} />} />
             </div>
           </div>
         </div>
