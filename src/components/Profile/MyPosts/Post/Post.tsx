@@ -1,12 +1,11 @@
 import React from 'react';
-import { PostDataType } from '../../../../redux/state';
+import { ActionsTypes, addPostAC, PostDataType, UpdateNewPostTextAC } from '../../../../redux/state';
 import style from './Post.module.css';
 
 type PostTypeProps = {
   postsData: Array<PostDataType>
   newPost: string
-  addPost: (post: string) => void
-  updateNewPostText: (newPost: string) => void
+  dispatch: (action: ActionsTypes) => void
 }
 
 export function Post(props: PostTypeProps) {
@@ -26,13 +25,14 @@ export function Post(props: PostTypeProps) {
   })
 
   const onChangePostHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    props.updateNewPostText(e.currentTarget.value)
+    props.dispatch(UpdateNewPostTextAC(e.currentTarget.value
+    ))
   }
   const addPostMessege = () => {
     const correctSpaceNewPost = props.newPost.trim()
     if (correctSpaceNewPost) {
-      props.addPost(correctSpaceNewPost)
-      props.updateNewPostText('')
+      props.dispatch(addPostAC(props.newPost))
+      props.dispatch(UpdateNewPostTextAC(''))
     }
 
   }

@@ -2,12 +2,58 @@ import { v1 } from "uuid"
 
 export type StoreType = {
   _state: StateRootType
+  _callSubScriber: () => void
+
   addPost: (post: string) => void
   updateNewPostText: (newPost: string) => void
+
   subscribe: (observer: () => void) => void
-  _callSubScriber: () => void
   getState: () => StateRootType
+  dispatch: (action: ActionsTypes) => void
 }
+export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof UpdateNewPostTextAC>
+
+export type PostDataType = {
+  id: string
+  avatar: string
+  post: string
+  likes: number
+}
+export type DialogDataType = {
+  name: string
+  id: string
+}
+export type MessageDataType = {
+  message: string
+  id: string
+}
+export type ProfileType = {
+  postsData: Array<PostDataType>
+  newPost: string
+}
+export type DialogsType = {
+  dialogData: Array<DialogDataType>
+  messageData: Array<MessageDataType>
+}
+export type StateRootType = {
+  profilePage: ProfileType
+  dialogPage: DialogsType
+
+}
+
+export const addPostAC = (post: string) => {
+  return {
+    type: 'ADD-POST',
+    post: post
+  } as const
+}
+export const UpdateNewPostTextAC = (newPost: string) => {
+  return {
+    type: 'UPDATE-NEW-POST-TEXT',
+    newPost: newPost
+  } as const
+}
+
 const store: StoreType = {
   _state: {
     profilePage: {
@@ -70,36 +116,25 @@ const store: StoreType = {
   },
   getState() {
     return this._state;
+  },
+  dispatch(action) {
+    if (action.type === 'ADD-POST') {
+      const newPost: PostDataType = {
+        id: v1(),
+        avatar: ' Your photo',
+        post: action.post,
+        likes: 0
+      }
+      this._state.profilePage.postsData.push(newPost)
+      this._callSubScriber();
+    } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+      this._state.profilePage.newPost = action.newPost
+      this._callSubScriber();
+    }
   }
 }
 
-export type PostDataType = {
-  id: string
-  avatar: string
-  post: string
-  likes: number
-}
-export type DialogDataType = {
-  name: string
-  id: string
-}
-export type MessageDataType = {
-  message: string
-  id: string
-}
-export type ProfileType = {
-  postsData: Array<PostDataType>
-  newPost: string
-}
-export type DialogsType = {
-  dialogData: Array<DialogDataType>
-  messageData: Array<MessageDataType>
-}
-export type StateRootType = {
-  profilePage: ProfileType
-  dialogPage: DialogsType
 
-}
 
 
 export default store

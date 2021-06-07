@@ -23,9 +23,8 @@ function App(props: AppPropsType) {
             <Menu />
             <div className="content-inner">
               <Route path='/profile' render={() => <Profile
-                addPost={props.store.addPost.bind(props.store)}
                 profilPage={props.store._state.profilePage}
-                updateNewPostText={props.store.updateNewPostText.bind(props.store)}
+                dispatch={props.store.dispatch.bind(props.store)}
               />} />
               <Route path='/dialogs' render={() => <Dialogs
                 dialogPage={props.store._state.dialogPage} />} />
