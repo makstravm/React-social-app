@@ -11,7 +11,7 @@ export type StoreType = {
   getState: () => StateRootType
   dispatch: (action: ActionsTypes) => void
 }
-export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof UpdateNewPostTextAC>
+export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof UpdateNewPostTextAC> | ReturnType<typeof UpdateNewMessageBodyAC> | ReturnType<typeof SendMessageyAC>
 
 export type PostDataType = {
   id: string
@@ -30,10 +30,12 @@ export type MessageDataType = {
 export type ProfileType = {
   postsData: Array<PostDataType>
   newPost: string
+
 }
 export type DialogsType = {
   dialogData: Array<DialogDataType>
   messageData: Array<MessageDataType>
+  newMessageText: string
 }
 export type StateRootType = {
   profilePage: ProfileType
@@ -51,6 +53,18 @@ export const UpdateNewPostTextAC = (newPost: string) => {
   return {
     type: 'UPDATE-NEW-POST-TEXT',
     newPost: newPost
+  } as const
+}
+export const UpdateNewMessageBodyAC = (newMessage: string) => {
+  return {
+    type: 'UPDATE-NEW-MESSAGE-BODY',
+    newMessage: newMessage
+  } as const
+}
+export const SendMessageyAC = (message: string) => {
+  return {
+    type: 'SEND-MESSAGE',
+    message: message
   } as const
 }
 
@@ -93,7 +107,9 @@ const store: StoreType = {
         { id: v1(), message: 'Hi. How are you?' },
         { id: v1(), message: 'Oh. Great. And you?' },
         { id: v1(), message: 'I am funny, thank you' }
-      ]
+      ],
+      newMessageText: ''
+
     }
   },
   _callSubScriber() { },
@@ -126,9 +142,18 @@ const store: StoreType = {
         likes: 0
       }
       this._state.profilePage.postsData.push(newPost)
+      this._state.profilePage.newPost = ''
       this._callSubScriber();
     } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
       this._state.profilePage.newPost = action.newPost
+      this._callSubScriber();
+    } else if (action.type === 'UPDATE-NEW-MESSAGE-BODY') {
+      this._state.dialogPage.newMessageText = action.newMessage
+      this._callSubScriber();
+    } else if (action.type === 'SEND-MESSAGE') {
+      const newMessage = this._state.dialogPage.newMessageText
+      this._state.dialogPage.newMessageText = ''
+      this._state.dialogPage.messageData.push({ id: v1(), message: newMessage })
       this._callSubScriber();
     }
   }

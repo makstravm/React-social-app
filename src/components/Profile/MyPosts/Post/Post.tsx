@@ -32,9 +32,7 @@ export function Post(props: PostTypeProps) {
     const correctSpaceNewPost = props.newPost.trim()
     if (correctSpaceNewPost) {
       props.dispatch(addPostAC(props.newPost))
-      props.dispatch(UpdateNewPostTextAC(''))
     }
-
   }
   const addPostKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter') {
