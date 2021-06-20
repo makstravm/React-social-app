@@ -1,11 +1,10 @@
 import { v1 } from "uuid"
+import { dialogsReducer, SendMessageyAC, UpdateNewMessageBodyAC } from "./dialogs-reducer copy"
+import { addPostAC, profileReducer, UpdateNewPostTextAC } from "./profile-reducer"
 
 export type StoreType = {
   _state: StateRootType
   _callSubScriber: () => void
-
-  addPost: (post: string) => void
-  updateNewPostText: (newPost: string) => void
 
   subscribe: (observer: () => void) => void
   getState: () => StateRootType
@@ -43,30 +42,8 @@ export type StateRootType = {
 
 }
 
-export const addPostAC = (post: string) => {
-  return {
-    type: 'ADD-POST',
-    post: post
-  } as const
-}
-export const UpdateNewPostTextAC = (newPost: string) => {
-  return {
-    type: 'UPDATE-NEW-POST-TEXT',
-    newPost: newPost
-  } as const
-}
-export const UpdateNewMessageBodyAC = (newMessage: string) => {
-  return {
-    type: 'UPDATE-NEW-MESSAGE-BODY',
-    newMessage: newMessage
-  } as const
-}
-export const SendMessageyAC = (message: string) => {
-  return {
-    type: 'SEND-MESSAGE',
-    message: message
-  } as const
-}
+
+
 
 const store: StoreType = {
   _state: {
@@ -113,20 +90,6 @@ const store: StoreType = {
     }
   },
   _callSubScriber() { },
-  addPost(post: string) {
-    const newPost: PostDataType = {
-      id: v1(),
-      avatar: ' Your photo',
-      post,
-      likes: 0
-    }
-    this._state.profilePage.postsData.push(newPost)
-    this._callSubScriber();
-  },
-  updateNewPostText(newPost: string) {
-    this._state.profilePage.newPost = newPost
-    this._callSubScriber();
-  },
   subscribe(observer: () => void) {
     this._callSubScriber = observer;
   },
@@ -134,28 +97,9 @@ const store: StoreType = {
     return this._state;
   },
   dispatch(action) {
-    if (action.type === 'ADD-POST') {
-      const newPost: PostDataType = {
-        id: v1(),
-        avatar: ' Your photo',
-        post: action.post,
-        likes: 0
-      }
-      this._state.profilePage.postsData.push(newPost)
-      this._state.profilePage.newPost = ''
-      this._callSubScriber();
-    } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-      this._state.profilePage.newPost = action.newPost
-      this._callSubScriber();
-    } else if (action.type === 'UPDATE-NEW-MESSAGE-BODY') {
-      this._state.dialogPage.newMessageText = action.newMessage
-      this._callSubScriber();
-    } else if (action.type === 'SEND-MESSAGE') {
-      const newMessage = this._state.dialogPage.newMessageText
-      this._state.dialogPage.newMessageText = ''
-      this._state.dialogPage.messageData.push({ id: v1(), message: newMessage })
-      this._callSubScriber();
-    }
+    this._state.profilePage = profileReducer(this._state.profilePage, action);
+    this._state.dialogPage = dialogsReducer(this._state.dialogPage, action);
+    this._callSubScriber()
   }
 }
 
