@@ -1,6 +1,6 @@
 import React from 'react';
-import { SendMessageyAC, UpdateNewMessageBodyAC } from '../../../redux/dialogs-reducer copy';
-import { ActionsTypes, MessageDataType } from '../../../redux/state';
+import { SendMessageyAC, UpdateNewMessageBodyAC } from '../../../redux/dialogs-reducer';
+import { ActionsTypes, MessageDataType } from '../../../redux/store';
 import style from '../Dialogs.module.css'
 
 

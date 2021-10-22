@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActionsTypes, DialogsType } from '../../redux/state';
+import { ActionsTypes, DialogsType } from '../../redux/store';
 import style from './Dialogs.module.css'
 import { DialogsItem } from './DialogsItem/DialogsItem';
 import { DialogsMessage } from './DialogsMessage/DialogsMessage';

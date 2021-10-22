@@ -6,7 +6,7 @@ import { Header } from './components/Header/Header';
 import { Menu } from './components/Menu/Menu';
 import { } from './components/Profile/MyPosts/MyPosts';
 import { Profile } from './components/Profile/Profile';
-import { StoreType } from './redux/state';
+import { StoreType } from './redux/store';
 
 type AppPropsType = {
   store: StoreType
@@ -14,6 +14,7 @@ type AppPropsType = {
 
 function App(props: AppPropsType) {
   const state = props.store.getState()
+  
   return (
     <BrowserRouter>
       <div className="app-wrapper">

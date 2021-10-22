@@ -1,11 +1,10 @@
 import { v1 } from "uuid"
-import { dialogsReducer, SendMessageyAC, UpdateNewMessageBodyAC } from "./dialogs-reducer copy"
+import { dialogsReducer, SendMessageyAC, UpdateNewMessageBodyAC } from "./dialogs-reducer"
 import { addPostAC, profileReducer, UpdateNewPostTextAC } from "./profile-reducer"
 
 export type StoreType = {
   _state: StateRootType
   _callSubScriber: () => void
-
   subscribe: (observer: () => void) => void
   getState: () => StateRootType
   dispatch: (action: ActionsTypes) => void
@@ -41,9 +40,6 @@ export type StateRootType = {
   dialogPage: DialogsType
 
 }
-
-
-
 
 const store: StoreType = {
   _state: {
@@ -89,7 +85,7 @@ const store: StoreType = {
 
     }
   },
-  _callSubScriber() { },
+  _callSubScriber() {},
   subscribe(observer: () => void) {
     this._callSubScriber = observer;
   },
