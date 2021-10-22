@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActionsTypes, PostDataType, } from '../../../redux/state';
+import { ActionsTypes, PostDataType, } from '../../../redux/store';
 import { Post } from './Post/Post';
 
 
