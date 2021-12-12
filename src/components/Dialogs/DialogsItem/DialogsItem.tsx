@@ -4,26 +4,29 @@ import { DialogDataType } from '../../../redux/store';
 import style from '../Dialogs.module.css'
 
 type DialogsItemPropsType = {
-  dialogData: Array<DialogDataType>
+    dialogData: Array<DialogDataType>
 }
 
 export const DialogsItem = (props: DialogsItemPropsType) => {
-  const dialogItemData = props.dialogData.map(d => {
-    const path = '/dialogs/' + d.id
+    const dialogItemData = props.dialogData.map((d) => {
+
+        const path = '/dialogs/' + d.id
+        return (
+            <NavLink to={path}
+                className={style.link}
+                activeClassName={style.active}
+                key={d.id}
+            >
+                {d.name}
+            </NavLink>
+        )
+    })
     return (
-      <NavLink to={path}
-        className={style.link}
-        activeClassName={style.active}
-      >
-        {d.name}
-      </NavLink>
+        <div className={style.items}>
+            {dialogItemData}
+
+        </div >
     )
-  })
-  return (
-    <div className={style.items}>
-      {dialogItemData}
-    </div >
-  )
 }
 
 

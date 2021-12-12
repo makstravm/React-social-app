@@ -5,7 +5,7 @@ import { profileReducer, StoreType } from "./profile-reducer"
 
 export type AppStateType = ReturnType<typeof reducers>
 
-const reducers = combineReducers({
+const reducers= combineReducers({
   profilePage: profileReducer,
   dialogPage: dialogsReducer,
 })

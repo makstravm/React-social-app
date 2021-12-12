@@ -9,33 +9,33 @@ import { Profile } from './components/Profile/Profile';
 import { StoreType } from './redux/store';
 
 type AppPropsType = {
-  store: StoreType
+    store: StoreType
 }
 
 function App(props: AppPropsType) {
-  const state = props.store.getState()
   
-  return (
-    <BrowserRouter>
-      <div className="app-wrapper">
-        <div className="container">
-          <Header />
-          <div className="content">
-            <Menu />
-            <div className="content-inner">
-              <Route path='/profile' render={() => <Profile
-                profilPage={props.store._state.profilePage}
-                dispatch={props.store.dispatch.bind(props.store)}
-              />} />
-              <Route path='/dialogs' render={() => <Dialogs
-                dialogPage={props.store._state.dialogPage}
-                dispatch={props.store.dispatch.bind(props.store)} />} />
+
+    return (
+        <BrowserRouter>
+            <div className="app-wrapper">
+                <div className="container">
+                    <Header />
+                    <div className="content">
+                        <Menu />
+                        <div className="content-inner">
+                            <Route path='/profile' render={() => <Profile
+                                profilPage={props.store.getState().profilePage}
+                                dispatch={props.store.dispatch.bind(props.store)}
+                            />} />
+                            <Route path='/dialogs' render={() => <Dialogs
+                                dialogPage={props.store.getState().dialogPage}
+                                dispatch={props.store.dispatch.bind(props.store)} />} />
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </BrowserRouter >
-  );
+        </BrowserRouter >
+    );
 }
 
 export default App;
