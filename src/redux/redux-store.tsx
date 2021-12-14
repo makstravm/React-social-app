@@ -3,7 +3,7 @@ import { dialogsReducer } from "./dialogs-reducer"
 import { profileReducer, StoreType } from "./profile-reducer"
 
 
-export type AppStateType = ReturnType<typeof reducers>
+// export type AppStateType = ReturnType<typeof reducers>
 
 const reducers= combineReducers({
   profilePage: profileReducer,
