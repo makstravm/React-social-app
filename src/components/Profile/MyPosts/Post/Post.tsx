@@ -6,10 +6,12 @@ import style from './Post.module.css';
 type PostTypeProps = {
     postsData: Array<PostDataType>
     newPost: string
-    dispatch: (action: ActionsTypes) => void
+    updateNewPostText: (value:string) => void
+    addPostMessege : (text: string) => void
 }
 
 export function Post(props: PostTypeProps) {
+
     const post = props.postsData.map(p => {
         return (
             <div key={p.id}
@@ -26,13 +28,12 @@ export function Post(props: PostTypeProps) {
     })
 
     const onChangePostHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(UpdateNewPostTextAC(e.currentTarget.value
-        ))
+        props.updateNewPostText(e.currentTarget.value)
     }
     const addPostMessege = () => {
         const correctSpaceNewPost = props.newPost.trim()
         if (correctSpaceNewPost) {
-            props.dispatch(addPostAC(props.newPost))
+            props.addPostMessege (props.newPost)
         }
     }
     const addPostKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {

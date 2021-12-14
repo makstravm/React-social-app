@@ -8,6 +8,7 @@ type DialogsItemPropsType = {
 }
 
 export const DialogsItem = (props: DialogsItemPropsType) => {
+    
     const dialogItemData = props.dialogData.map((d) => {
 
         const path = '/dialogs/' + d.id
@@ -24,7 +25,6 @@ export const DialogsItem = (props: DialogsItemPropsType) => {
     return (
         <div className={style.items}>
             {dialogItemData}
-
         </div >
     )
 }

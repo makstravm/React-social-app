@@ -1,7 +1,7 @@
 import { type } from 'node:os';
 import React, { Profiler } from 'react';
 import { ActionsTypes, ProfileType } from '../../redux/store';
-import { MyPosts } from './MyPosts/MyPosts';
+import { MyPostContainer } from './MyPosts/MyPostsContainer';
 import { ProfileTop } from './Profile-top/Profile-top';
 import style from './Profile.module.css';
 
@@ -36,7 +36,7 @@ export function Profile(props: ProfilePropsType) {
                         </div>
                     </div>
                 </div>
-                <MyPosts
+                < MyPostContainer
                     postsData={props.profilPage.postsData}
                     newPost={props.profilPage.newPost}
                     dispatch={props.dispatch}

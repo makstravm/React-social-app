@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
-import { Dialogs } from './components/Dialogs/Dialogs';
+import { DialogsContainer } from './components/Dialogs/DialogsContainer';
 import { Header } from './components/Header/Header';
 import { Menu } from './components/Menu/Menu';
-import { } from './components/Profile/MyPosts/MyPosts';
+import { } from './components/Profile/MyPosts/MyPostsContainer';
 import { Profile } from './components/Profile/Profile';
 import { StoreType } from './redux/store';
 
@@ -13,8 +13,6 @@ type AppPropsType = {
 }
 
 function App(props: AppPropsType) {
-  
-
     return (
         <BrowserRouter>
             <div className="app-wrapper">
@@ -27,7 +25,7 @@ function App(props: AppPropsType) {
                                 profilPage={props.store.getState().profilePage}
                                 dispatch={props.store.dispatch.bind(props.store)}
                             />} />
-                            <Route path='/dialogs' render={() => <Dialogs
+                            <Route path='/dialogs' render={() => <DialogsContainer
                                 dialogPage={props.store.getState().dialogPage}
                                 dispatch={props.store.dispatch.bind(props.store)} />} />
                         </div>

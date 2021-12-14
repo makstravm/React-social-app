@@ -1,13 +1,14 @@
 import React from 'react';
-import { SendMessageyAC, UpdateNewMessageBodyAC } from '../../../redux/dialogs-reducer';
-import { ActionsTypes, MessageDataType } from '../../../redux/store';
+
+import { MessageDataType } from '../../../redux/store';
 import style from '../Dialogs.module.css'
 
 
 type DialogsMessagePropsType = {
     message: Array<MessageDataType>
     newMessage: string
-    dispatch: (action: ActionsTypes) => void
+    onNewMessageChange: (value: string) => void
+    sendMessageyAC: (value: string) => void
 }
 
 export const DialogsMessage = (props: DialogsMessagePropsType) => {
@@ -19,11 +20,11 @@ export const DialogsMessage = (props: DialogsMessagePropsType) => {
     const onSendMessageClick = () => {
         const correctSpaceNewPost = props.newMessage.trim()
         if (correctSpaceNewPost) {
-            props.dispatch(SendMessageyAC(props.newMessage))
+            props.sendMessageyAC(props.newMessage)
         }
     }
     const onNewMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(UpdateNewMessageBodyAC(e.currentTarget.value))
+        props.onNewMessageChange(e.currentTarget.value)
     }
     const sendMessageKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === 'Enter') {
