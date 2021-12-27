@@ -1,27 +1,29 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { SendMessageyAC, UpdateNewMessageBodyAC } from '../../redux/dialogs-reducer';
-import { ActionsTypes, DialogsType } from '../../redux/store';
+import { StoreType } from '../../redux/store';
 import style from './Dialogs.module.css'
 import { DialogsItem } from './DialogsItem/DialogsItem';
 import { DialogsMessage } from './DialogsMessage/DialogsMessage';
 
 type DialogsPropsType = {
-    dialogPage: DialogsType
-    dispatch: (action: ActionsTypes) => void
+
+    store: StoreType
 }
 
 export function DialogsContainer(props: DialogsPropsType) {
+    const { dialogData, messageData, newMessageText } = props.store.getState().dialogPage
 
-    const onNewMessageChange = (value:string) => props.dispatch(UpdateNewMessageBodyAC(value))
+    const onNewMessageChange = (value: string) => props.store.dispatch(UpdateNewMessageBodyAC(value))
 
-    const sendMessageyAC = (value:string) => props.dispatch(SendMessageyAC(value))
+    const sendMessageyAC = (value: string) => props.store.dispatch(SendMessageyAC(value))
 
     return (
         <div className={style.dialogs}>
-            <DialogsItem dialogData={props.dialogPage.dialogData} />
+            <DialogsItem dialogData={dialogData} />
             <DialogsMessage
-                message={props.dialogPage.messageData}
-                newMessage={props.dialogPage.newMessageText}
+                message={messageData}
+                newMessage={newMessageText}
                 onNewMessageChange={onNewMessageChange}
                 sendMessageyAC={sendMessageyAC} />
         </div>
