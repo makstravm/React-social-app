@@ -1,25 +1,24 @@
 import React from 'react';
-import { addPostAC, UpdateNewPostTextAC } from '../../../redux/profile-reducer';
+import { addPostAC, StoreType, UpdateNewPostTextAC } from '../../../redux/profile-reducer';
 import { ActionsTypes, PostDataType } from '../../../redux/store';
 import { Post } from './Post/Post';
 
 type PostContainerTypeProps = {
-    postsData: Array<PostDataType>
-    newPost: string
-    dispatch: (action: ActionsTypes) => void
+    store: StoreType
 }
 
 export function MyPostContainer(props: PostContainerTypeProps) {
+    const { newPost, postsData } = props.store.getState().profilePage
+    // dispatch = { props.store.dispatch.bind(props.store) }
+    const updateNewPostText = (value: string) => props.store.dispatch(UpdateNewPostTextAC(value))
 
-    const updateNewPostText = (value: string) => props.dispatch(UpdateNewPostTextAC(value))
-
-    const addPostMessege = () => props.dispatch(addPostAC(props.newPost))
+    const addPostMessege = () => props.store.dispatch(addPostAC(newPost))
 
     return (
         <Post
             updateNewPostText={updateNewPostText}
             addPostMessege={addPostMessege}
-            postsData={props.postsData}
-            newPost={props.newPost}
+            postsData={postsData}
+            newPost={newPost}
         />)
 }

@@ -8,9 +8,9 @@ import store from './redux/redux-store';
 
 
 export const rerenderTree = () => {
-// console.log(store.getState());
+    // console.log(store.getState());
     ReactDOM.render(<App
-        store={store}
+    
     />, document.getElementById('root'));
 }
 rerenderTree()

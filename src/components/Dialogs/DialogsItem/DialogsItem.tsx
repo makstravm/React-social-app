@@ -12,6 +12,7 @@ export const DialogsItem = (props: DialogsItemPropsType) => {
     const dialogItemData = props.dialogData.map((d) => {
 
         const path = '/dialogs/' + d.id
+
         return (
             <NavLink to={path}
                 className={style.link}
@@ -22,6 +23,7 @@ export const DialogsItem = (props: DialogsItemPropsType) => {
             </NavLink>
         )
     })
+    
     return (
         <div className={style.items}>
             {dialogItemData}
